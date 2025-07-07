@@ -56,6 +56,20 @@ public class Main {
 
 
         task("6.\tПроверить, есть ли \"универсальные отличники\" — студенты, у которых все оценки ≥ 4.5.");
+        System.out.println(analyzer.isThereAnyAMarkPerson(students) ? "Есть" : "Нет");
+
+
+        task("7.\tНайти студентов, у которых есть хотя бы одна \"неудовлетворительная\" оценка (< 3.0).");
+        System.out.println(analyzer.getListOfBadMarkPersons(students));
+
+
+        task("8.\tОпределить, есть ли курсы, на которых все студенты получили ≥ 4.0 (\"идеальные курсы\").");
+        System.out.println(analyzer.isThereAnyIdealCourse(students) ? "Есть" : "Нет");
+
+
+        task("9.\tРассчитать \"индекс разнообразия\" факультета (количество уникальных курсов / количество студентов).");
+        System.out.println("Physics: " + analyzer.diversityIndex("Physics", students));
+        System.out.println("CS: " + analyzer.diversityIndex("CS", students));
 
     }
 

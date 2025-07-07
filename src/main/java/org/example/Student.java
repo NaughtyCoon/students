@@ -1,6 +1,5 @@
 package org.example;
 
-import java.util.List;
 import java.util.Map;
 
 public class Student {
@@ -18,10 +17,6 @@ public class Student {
 
     public String getFaculty() {
         return faculty;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public Map<String, Double> getGrades() {
