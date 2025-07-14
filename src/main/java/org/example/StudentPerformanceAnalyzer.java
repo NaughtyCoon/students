@@ -1,6 +1,5 @@
 package org.example;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -29,7 +28,7 @@ public class StudentPerformanceAnalyzer {
                         .sorted(Map.Entry.<Student, Double>comparingByValue().reversed())
                         .limit(3)
                         .map(Map.Entry::getKey)
-                        .collect(Collectors.toList());
+                        .toList();
 
     }
 
@@ -45,7 +44,7 @@ public class StudentPerformanceAnalyzer {
                     return average < hardGradeLevel;
                 })
                 .map(Map.Entry::getKey)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public Map<String, List<Student>> groupByFaculty (List<Student> students) {
