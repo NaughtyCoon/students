@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class StudentPerformanceAnalyzer {
 
-    public Map<Student, Double> getAverageGrade (List<Student> students) {
+    public Map<Student, Double> getAverageGrade(List<Student> students) {
 
         return
                 students.stream()
@@ -21,7 +21,7 @@ public class StudentPerformanceAnalyzer {
 
     }
 
-    public List<Student> getTopThreeStudents (List<Student> students) {
+    public List<Student> getTopThreeStudents(List<Student> students) {
 
         return
                 getAverageGrade(students).entrySet().stream()
@@ -35,54 +35,55 @@ public class StudentPerformanceAnalyzer {
     public List<String> getDifficultCourses(List<Student> students, double hardGradeLevel) {
 
         return
-            flatMapOfGrades(students).entrySet().stream()
-                .filter(entry -> {
-                    double average = entry.getValue().stream()
-                        .mapToDouble(Double::doubleValue)
-                        .average()
-                        .orElse(5.0); // если оценок вообще нет, считаем курс не сложным
-                    return average < hardGradeLevel;
-                })
-                .map(Map.Entry::getKey)
-                .toList();
-    }
-
-    public Map<String, List<Student>> groupByFaculty (List<Student> students) {
-
-        return
-            students.stream()
-                .collect(Collectors.groupingBy(
-                    student -> student.getFaculty() != null ? student.getFaculty() : "General"
-                )
-            );
+                flatMapOfGrades(students).entrySet().stream()
+                        .filter(entry -> {
+                            double average = entry.getValue().stream()
+                                    .mapToDouble(Double::doubleValue)
+                                    .average()
+                                    .orElse(5.0); // если оценок вообще нет, считаем курс не сложным
+                            return average < hardGradeLevel;
+                        })
+                        .map(Map.Entry::getKey)
+                        .toList();
 
     }
 
-    public boolean isThereAnyAMarkPerson (List<Student> students) {
+    public Map<String, List<Student>> groupByFaculty(List<Student> students) {
 
         return
-            students.stream()
-                .anyMatch(student -> student.getGrades().entrySet().stream()
-                    .allMatch(entry -> entry.getValue() >=4.5));
+                students.stream()
+                        .collect(Collectors.groupingBy(
+                                        student -> student.getFaculty() != null ? student.getFaculty() : "General"
+                                )
+                        );
 
     }
 
-    public List<Student> getListOfBadMarkPersons (List<Student> students) {
+    public boolean isThereAnyAMarkPerson(List<Student> students) {
 
         return
-            students.stream()
-                .filter(student -> student.getGrades().entrySet().stream()
-                    .anyMatch(entry -> entry.getValue() < 3.0))
-                .toList();
+                students.stream()
+                        .anyMatch(student -> student.getGrades().entrySet().stream()
+                                .allMatch(entry -> entry.getValue() >= 4.5));
 
     }
 
-    public boolean isThereAnyIdealCourse (List<Student> students) {
+    public List<Student> getListOfBadMarkPersons(List<Student> students) {
 
         return
-            flatMapOfGrades(students).entrySet().stream()
-                .anyMatch(entry -> entry.getValue().stream()
-                    .allMatch(grade -> grade >= 4.0));
+                students.stream()
+                        .filter(student -> student.getGrades().entrySet().stream()
+                                .anyMatch(entry -> entry.getValue() < 3.0))
+                        .toList();
+
+    }
+
+    public boolean isThereAnyIdealCourse(List<Student> students) {
+
+        return
+                flatMapOfGrades(students).entrySet().stream()
+                        .anyMatch(entry -> entry.getValue().stream()
+                                .allMatch(grade -> grade >= 4.0));
 
     }
 
@@ -107,16 +108,16 @@ public class StudentPerformanceAnalyzer {
     }
 
 
-    private Map<String, List<Double>> flatMapOfGrades (List<Student> students) {
+    private Map<String, List<Double>> flatMapOfGrades(List<Student> students) {
 
         return
-            students.stream()
-                .flatMap(student -> student.getGrades().entrySet().stream())
-                .collect(Collectors.groupingBy(
-                    Map.Entry::getKey,
-                    Collectors.mapping(Map.Entry::getValue, Collectors.toList())
-                    )
-                );
+                students.stream()
+                        .flatMap(student -> student.getGrades().entrySet().stream())
+                        .collect(Collectors.groupingBy(
+                                        Map.Entry::getKey,
+                                        Collectors.mapping(Map.Entry::getValue, Collectors.toList())
+                                )
+                        );
 
     }
 
