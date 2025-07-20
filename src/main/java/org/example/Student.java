@@ -13,6 +13,10 @@ public class Student {
         this.grades = grades;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public String getFaculty() {
         return faculty;
     }
