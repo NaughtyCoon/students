@@ -5,13 +5,11 @@ import java.util.Map;
 public class Student {
     private final String name;
     private final String faculty;
-    private final int enrollmentYear;
     private final Map<String, Double> grades;
 
-    public Student(String name, String faculty, int enrollmentYear, Map<String, Double> grades) {
+    public Student(String name, String faculty, Map<String, Double> grades) {
         this.name = name;
         this.faculty = faculty;
-        this.enrollmentYear = enrollmentYear;
         this.grades = grades;
     }
 
