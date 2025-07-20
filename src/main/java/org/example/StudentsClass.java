@@ -26,6 +26,6 @@ public class StudentsClass {
             new Student("Ryan", "Physics", Map.of("Physics", 4.5, "Electromagnetism", 4.2, "Optics", 3.8, "Nuclear Physics", 3.5)),
             new Student("Sophia", "CS", Map.of("Algorithms", 4.9, "OS", 4.7, "Security", 4.3, "Cryptography", 4.6)),
             new Student("Tom", "Math", Map.of("Math", 4.7, "Topology", 4.5, "Algebra", 4.4, "Logic", 3.8))
-    );
+     );
 
 }

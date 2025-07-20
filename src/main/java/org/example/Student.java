@@ -21,6 +21,13 @@ public class Student {
         return this.grades;
     }
 
+    public double getStudentAverageGrade() {
+        return grades.values().stream()
+                .mapToDouble(Double::doubleValue)
+                .average()
+                .orElse(0.0);
+    }
+
     @Override
     public String toString() {
         return this.name;

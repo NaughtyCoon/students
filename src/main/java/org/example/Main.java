@@ -14,7 +14,7 @@ public class Main {
         StudentPerformanceAnalyzer analyzer = new StudentPerformanceAnalyzer();
 
         task("2.\tНайти средний балл каждого студента (Map<Student, Double>).");
-        System.out.println(analyzer.getAverageGrade(students).toString());
+        System.out.println(analyzer.getMapOfAverageGrades(students).toString());
 
 
         task("3.\tНайти топ-3 студентов с самым высоким средним баллом.");

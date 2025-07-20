@@ -7,24 +7,21 @@ import java.util.stream.Collectors;
 
 public class StudentPerformanceAnalyzer {
 
-    public Map<Student, Double> getAverageGrade(List<Student> students) {
+    public Map<Student, Double> getMapOfAverageGrades(List<Student> students) {
 
         return
                 students.stream()
                         .collect(Collectors.toMap(
                                 student -> student,
-                                student -> student.getGrades().values().stream()
-                                        .mapToDouble(Double::doubleValue)
-                                        .average()
-                                        .orElse(0.0))
-                        );
+                                Student::getStudentAverageGrade
+                        ));
 
     }
 
     public List<Student> getTopThreeStudents(List<Student> students) {
 
         return
-                getAverageGrade(students).entrySet().stream()
+                getMapOfAverageGrades(students).entrySet().stream()
                         .sorted(Map.Entry.<Student, Double>comparingByValue().reversed())
                         .limit(3)
                         .map(Map.Entry::getKey)
