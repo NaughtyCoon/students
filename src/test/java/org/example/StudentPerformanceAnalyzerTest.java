@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
@@ -34,7 +35,7 @@ class StudentPerformanceAnalyzerTest {
     }
 
     @Test
-    void getMapOfAverageGrades_WhenStudentListIsEmpty_ThenReturnEmptyMap() {
+    void getMapOfAverageGrades_whenStudentListIsEmpty_thenReturnEmptyMap() {
 
         Map<Student, Double> result = analyzer.getMapOfAverageGrades(List.of());
         assertTrue(result.isEmpty());
@@ -42,7 +43,7 @@ class StudentPerformanceAnalyzerTest {
     }
 
     @Test
-    void getMapOfAverageGrade_WhenStudentHasNoGrades_ThenReturnZero() {
+    void getMapOfAverageGrade_whenStudentHasNoGrades_thenReturnZero() {
 
         Student student = new Student("Иван Иванов", "Physics", Map.of());
         Map<Student, Double> result = analyzer.getMapOfAverageGrades(List.of(student));
@@ -52,13 +53,13 @@ class StudentPerformanceAnalyzerTest {
 
     @ParameterizedTest
     @MethodSource("studentGradeProvider")
-    void getAverageGrade_WhenSendFullListOfStudents_ThenReturnMapOfCorrectAverageGradesForAllStudents
+    void getAverageGrade_whenSendFullListOfStudents_thenReturnMapOfCorrectAverageGradesForAllStudents
             (Student student, double expectedAverage) {
         assertEquals(expectedAverage, student.getStudentAverageGrade(), 0.001);
     }
 
     @Test
-    void getTopThreeStudents_WhenStudentListIsEmpty_ThenReturnEmptyList() {
+    void getTopThreeStudents_whenStudentListIsEmpty_thenReturnEmptyList() {
 
         List<Student> result = analyzer.getTopThreeStudents(List.of());
         assertTrue(result.isEmpty());
@@ -66,7 +67,7 @@ class StudentPerformanceAnalyzerTest {
     }
 
     @Test
-    void getTopThreeStudents_WhenStudentListIsSufficient_ThenReturnCorrectTopThree() {
+    void getTopThreeStudents_whenStudentListIsSufficient_thenReturnCorrectTopThree() {
 
         List<Student> result = analyzer.getTopThreeStudents(students);
 
@@ -79,7 +80,7 @@ class StudentPerformanceAnalyzerTest {
     }
 
     @Test
-    void getDifficultCourses_WhenStudentListIsEmpty_ThenReturnEmptyDiffCoursesList() {
+    void getDifficultCourses_whenStudentListIsEmpty_thenReturnEmptyDiffCoursesList() {
 
         List<String> result = analyzer.getDifficultCourses(List.of(), 4.0);
         assertTrue(result.isEmpty());
@@ -87,7 +88,7 @@ class StudentPerformanceAnalyzerTest {
     }
 
     @Test
-    void getDifficultCourses_WhenAllCoursesAreEasy_ThenReturnEmptyDiffCoursesList() {
+    void getDifficultCourses_whenAllCoursesAreEasy_thenReturnEmptyDiffCoursesList() {
 
         List<String> result = analyzer.getDifficultCourses(students, 1.0);
         assertTrue(result.isEmpty());
@@ -95,7 +96,7 @@ class StudentPerformanceAnalyzerTest {
     }
 
     @Test
-    void getDifficultCourses_WhenStudentListIsSufficient_ThenReturnCorrectDiffCoursesList() {
+    void getDifficultCourses_whenStudentListIsSufficient_thenReturnCorrectDiffCoursesList() {
 
         List<String> result = analyzer.getDifficultCourses(students, 4.0);
         assertEquals(difficultCoursesList, result);
@@ -103,7 +104,7 @@ class StudentPerformanceAnalyzerTest {
     }
 
     @Test
-    void groupByFaculty_WhenStudentListIsEmpty_ThenReturnEmptyGroupedStudentsMap() {
+    void groupByFaculty_whenStudentListIsEmpty_thenReturnEmptyGroupedStudentsMap() {
 
         Map<String, List<Student>> result = analyzer.groupByFaculty(List.of());
         assertTrue(result.isEmpty());
@@ -111,7 +112,7 @@ class StudentPerformanceAnalyzerTest {
     }
 
     @Test
-    void groupByFaculty_WhenStudentListIsSufficient_ThenReturnMapWithFacultiesAsKeys() {
+    void groupByFaculty_whenStudentListIsSufficient_thenReturnMapWithFacultiesAsKeys() {
 
         Map<String, List<Student>> result = analyzer.groupByFaculty(students);
         assertFalse(result.keySet().isEmpty());
@@ -119,7 +120,7 @@ class StudentPerformanceAnalyzerTest {
     }
 
     @Test
-    void isThereAnyAMarkPerson_WhenStudentListIsEmpty_ThenReturnFalse() {
+    void isThereAnyAMarkPerson_whenStudentListIsEmpty_thenReturnFalse() {
 
         boolean result = analyzer.isThereAnyAMarkPerson(List.of());
         assertFalse(result);
@@ -127,7 +128,7 @@ class StudentPerformanceAnalyzerTest {
     }
 
     @Test
-    void isThereAnyAMarkPerson_WhenStudentListContainsAMarkStudent_ThenReturnTrue() {
+    void isThereAnyAMarkPerson_whenStudentListContainsAMarkStudent_thenReturnTrue() {
 
         boolean result = analyzer.isThereAnyAMarkPerson(students);
         assertTrue(result);
@@ -135,7 +136,7 @@ class StudentPerformanceAnalyzerTest {
     }
 
     @Test
-    void isThereAnyAMarkPerson_WhenStudentListContainsNoAMarkStudent_ThenReturnFalse() {
+    void isThereAnyAMarkPerson_whenStudentListContainsNoAMarkStudent_thenReturnFalse() {
 
         // Чтобы проверить, вернётся ли false при тестировании, сначала создадим
         // список студентов, заведома обладающих хоть одной оценкой ниже 4.5
@@ -151,7 +152,7 @@ class StudentPerformanceAnalyzerTest {
     }
 
     @Test
-    void getListOfBadMarkPersons_WhenStudentListContainsBadStudents_ThenReturnThatList() {
+    void getListOfBadMarkPersons_whenStudentListContainsBadStudents_thenReturnThatList() {
 
         List<String> result = analyzer.getListOfBadMarkPersons(students).stream()
                 .map(Student::getName)
@@ -161,7 +162,7 @@ class StudentPerformanceAnalyzerTest {
     }
 
     @Test
-    void getListOfBadMarkPersons_WhenStudentListContainsNoBadStudents_ThenReturnEmptyList() {
+    void getListOfBadMarkPersons_whenStudentListContainsNoBadStudents_thenReturnEmptyList() {
 
         // Чтобы проверить, вернётся ли empty List при тестировании, сначала создадим
         // список студентов, заведома не обладающих ни одной оценкой ниже 3
@@ -175,5 +176,34 @@ class StudentPerformanceAnalyzerTest {
         assertTrue(result.isEmpty());
 
     }
+
+    @Test
+    void isThereAnyIdealCourse_whenStudentListIsEmpty_thenReturnFalse() {
+
+        List<Student> list = new ArrayList<>();
+
+        assertEquals(false, analyzer.isThereAnyIdealCourse(list));
+
+    }
+
+    @Test
+    void isThereAnyIdealCourse_whenStudentListExists_thenReturnTrue() {
+        assertEquals(true, analyzer.isThereAnyIdealCourse(students));
+    }
+
+    @Test
+    void diversityIndex_whenFacultyDoesNotExistOrNoneIsEnrolled_thenReturnNumberCodedError() {
+        assertEquals(-1, analyzer.diversityIndex("SomeWrongEntry", students));
+    }
+
+    @Test
+    void diversityIndex_whenFacultyExists_thenReturnCorrectIndex() {
+
+        assertEquals(2.2, analyzer.diversityIndex("Physics", students), 0.01);
+        assertEquals(1.8333, analyzer.diversityIndex("CS", students), 0.01);
+
+    }
+
+
 
 }

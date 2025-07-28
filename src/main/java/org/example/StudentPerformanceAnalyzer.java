@@ -77,6 +77,8 @@ public class StudentPerformanceAnalyzer {
 
     public boolean isThereAnyIdealCourse(List<Student> students) {
 
+        if (students.isEmpty()) return false;
+
         return
                 flatMapOfGrades(students).entrySet().stream()
                         .anyMatch(entry -> entry.getValue().stream()

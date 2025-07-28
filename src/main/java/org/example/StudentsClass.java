@@ -3,6 +3,11 @@ package org.example;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * В настоящий класс вынесено изначальное создание списка студентов, чтобы не повторять эту операцию дважды,
+ * в классе Main и в StudentPerformanceAnalyzerTest. В каждом из этих классов просто создаётся своя ссылка
+ * на данную коллекцию, и работа производится через неё.
+ */
 public class StudentsClass {
 
      static final List<Student> list = List.of(
@@ -27,5 +32,7 @@ public class StudentsClass {
             new Student("Sophia", "CS", Map.of("Algorithms", 4.9, "OS", 4.7, "Security", 4.3, "Cryptography", 4.6)),
             new Student("Tom", "Math", Map.of("Math", 4.7, "Topology", 4.5, "Algebra", 4.4, "Logic", 3.8))
      );
+
+     List<Student> newList = list;
 
 }
